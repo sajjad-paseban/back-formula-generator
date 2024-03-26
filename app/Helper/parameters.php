@@ -13,4 +13,8 @@ class Parameters{
     public function test(): int{
         return 85;
     }
+
+    public function karbari(){
+        return 0;
+    }
 }

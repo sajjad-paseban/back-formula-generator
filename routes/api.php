@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\EarningController;
 use App\Http\Controllers\VariablesController;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
@@ -26,4 +27,5 @@ Route::prefix('compiler')->group(function (){
 
 Route::prefix('formula')->group(function (){
     Route::resource('variables', VariablesController::class);
+    Route::resource('earning', EarningController::class);
 });
