@@ -13,7 +13,7 @@ class EarningController extends Controller
      */
     public function index()
     {
-        $data = Earning::all()->setHidden([
+        $data = Earning::orderBy('id','desc')->get()->setHidden([
             'created_at',
             'updated_at'
         ]);
@@ -57,7 +57,9 @@ class EarningController extends Controller
      */
     public function show(string $id)
     {
-        //
+        return Response::json([
+            'row' => Earning::find($id)
+        ], 200);
     }
 
     /**
@@ -73,7 +75,18 @@ class EarningController extends Controller
      */
     public function update(Request $request, string $id)
     {
-        //
+        $result = Earning::where('id', $id)->update($request->all());
+        
+        if($result){
+            return Response::json([
+                'message' => 'عملیات با موفقیت انجام شد'
+            ], 201);
+        }
+
+
+        return Response::json([
+            'message' => 'عملیات انجام نشد'
+        ], 400);
     }
 
     /**
