@@ -2,6 +2,7 @@
 
 use App\Http\Controllers\EarningController;
 use App\Http\Controllers\VariablesController;
+    use App\Models\Earning;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 
@@ -18,10 +19,18 @@ use Illuminate\Support\Facades\Route;
 */
 
 Route::prefix('compiler')->group(function (){
-    Route::post('run', function(){
-        $helper = new Parameters();
+    Route::get('run', function(Request $request){
 
-        return eval(request()->post('code'));
+        
+        $melk_id = $request->query('melk_id');
+        $earning_id = $request->query('earning_id');
+        
+        $earning = Earning::find($earning_id);
+
+        $helper = new Parameters($melk_id);
+
+        // return $earning->Body;
+        return eval($earning->Body);
     });
 });
 
