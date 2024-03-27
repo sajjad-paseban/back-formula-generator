@@ -14,7 +14,7 @@ class VariablesController extends Controller
      */
     public function index()
     {
-        $data = Variables::all()->setHidden([
+        $data = Variables::orderBy('id', 'desc')->get()->setHidden([
             'created_at',
             'updated_at'
         ]);
@@ -41,6 +41,7 @@ class VariablesController extends Controller
         $messages = [
             'name.required' => 'فیلد نام متغیر خالی می باشد',
             'key.required' => 'فیلد کلید متغیر خالی می باشد',
+            'type.required' => 'یکی از گزینه ها را انتخاب نمایید',
             'body.required' => 'فیلد دیتا متغیر خالی می باشد',
             'information.required' => 'فیلد تعریف متغیر خالی می باشد',
         ];
@@ -48,6 +49,7 @@ class VariablesController extends Controller
         $request->validate([
             'name' => 'required',
             'key' => 'required',
+            'type' => 'required',
             'body' => 'required',
             'information' => 'required',
         ], $messages);
